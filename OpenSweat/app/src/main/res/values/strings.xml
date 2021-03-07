@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">OpenSweat</string>
+    <string name="MainWindowTitle">OpenSweat</string>
+    <string name="NoFanFound">No Fan Controller Available</string>
+    <string name="FanFound">Fan Controller Available</string>
+    <string name="Fan1Unknown">Fan Status Unknown</string>
+    <string name="Fan2Unknown">Fan Status Unknown</string>
+    <string name="Fan1ButtonText">Toggle Fan 1</string>
+    <string name="Fan2ButtonText">Toggle Fan 2</string>
+    <string name="FanButtonOn">On</string>
+    <string name="FanButtonOff">Off</string>
+    <string name="Query">Query:</string>
+    <string name="Status">Status</string>
+    <string name="None">None</string>
+</resources>
