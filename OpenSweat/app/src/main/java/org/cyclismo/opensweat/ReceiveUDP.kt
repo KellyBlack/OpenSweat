@@ -25,6 +25,7 @@ package org.cyclismo.opensweat
 import android.content.Context
 import android.content.Intent
 import java.io.IOException
+import java.lang.Exception
 import java.net.DatagramPacket
 import java.net.DatagramSocket
 import java.net.InetAddress
@@ -74,6 +75,9 @@ class ReceiveUDP constructor(
             //println("Socket Exception ${e.message}")
             return
 
+        } catch(e: Exception) {
+            //print("General exception ${e.message)")
+            return
         }
 
         while (running) {

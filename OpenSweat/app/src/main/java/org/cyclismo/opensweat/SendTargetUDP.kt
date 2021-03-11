@@ -22,6 +22,7 @@
 package org.cyclismo.opensweat
 
 import java.io.IOException
+import java.lang.Exception
 import java.net.*
 
 /* ****************************************************************
@@ -63,6 +64,8 @@ class SendTargetUDP  constructor(
             //println("IO Exception ${e.message}")
         } catch (e: SocketException) {
             //println("Socket Exception ${e.message}")
+        } catch(e: Exception) {
+            //print("General exception ${e.message)")
         }
 
     }

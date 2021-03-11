@@ -26,6 +26,7 @@ import android.content.Context
 import android.net.DhcpInfo
 import android.net.wifi.WifiManager
 import java.io.IOException
+import java.lang.Exception
 import java.net.*
 
 /* ****************************************************************
@@ -77,6 +78,8 @@ class SendBroadcastUDP  constructor(
             //println("IO Exception ${e.message}")
         } catch (e: SocketException) {
             //println("Socket Exception ${e.message}")
+        } catch(e: Exception) {
+            //print("General exception ${e.message)")
         }
 
     }
