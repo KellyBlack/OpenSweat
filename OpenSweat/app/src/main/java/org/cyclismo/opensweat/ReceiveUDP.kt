@@ -83,7 +83,13 @@ class ReceiveUDP constructor(
         while (running) {
             // Wait and see if anybody out there is lonely enough to send some good information our way.
             val packet: DatagramPacket = DatagramPacket(buffer,buffer.size)
-            socket.receive(packet)
+            try {
+                socket.receive(packet)
+            } catch (e: Exception) {
+                //print("Exception receiving: ${e.message}")
+                return
+            }
+
 
             // We must have received something! Somebody loves us!
             // Get all of the relevant information and then let the main thread know

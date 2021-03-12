@@ -50,6 +50,7 @@ class MainActivity : AppCompatActivity() {
 
      ****************************************************** */
 
+    var receiveThreadActive: Boolean = false                        // variable use to determine if the receive thread has been started
     val portNumber: Int = 3517                                      // The port that UDP will use to make out going queries.
     val fanStatus: Array<Boolean> = arrayOf<Boolean>(false,false)   // Each element of the array indicates whether or not the corresponding fan is on or off
     val fanButtons: MutableList<Button> = arrayListOf<Button>()     // Each element of the list is a pointer to the corresponding fan toggle button
@@ -64,9 +65,12 @@ class MainActivity : AppCompatActivity() {
 
         // Start up a separate thread that will listen on the appropriate UDP port
         // for an incoming message from a fan controller. Set the current context
-        // on the listener so it can send an intent to this activity.
-        this.incomingUDP.start()
-        this.incomingUDP.setContext(applicationContext)
+        // on the listener so it can send an intent to this activity
+        if(!this.receiveThreadActive) {
+            this.receiveThreadActive = true
+            this.incomingUDP.setContext(applicationContext)
+            this.incomingUDP.start()
+        }
 
         //this.fanQueryStatus()
         // Set up a receiver so that when an incoming message is received

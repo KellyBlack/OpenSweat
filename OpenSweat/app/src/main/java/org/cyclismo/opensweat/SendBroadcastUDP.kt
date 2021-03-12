@@ -53,8 +53,6 @@ class SendBroadcastUDP  constructor(
         // Method called when an object of this type is told to run a separate thread.
         // This will send a broadcast UDP message on the whole subnet.
         try {
-            println("sending: $this.infoToShare")
-
             // Specify which subnet to use for the broadcast.
             //val me: InetAddress? = InetAddress.getByName("192.168.1.135")
             //val me: InetAddress? = this.getBroadcastAddress()

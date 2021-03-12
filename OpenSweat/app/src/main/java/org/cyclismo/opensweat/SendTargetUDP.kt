@@ -51,7 +51,6 @@ class SendTargetUDP  constructor(
     public override fun run()
     {
         try {
-            println(this.infoToShare)
             val sendSocket = DatagramSocket(this.port)
             sendSocket.reuseAddress = true
 
