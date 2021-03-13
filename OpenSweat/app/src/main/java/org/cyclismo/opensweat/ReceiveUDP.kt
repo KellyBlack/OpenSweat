@@ -28,7 +28,6 @@ import java.io.IOException
 import java.lang.Exception
 import java.net.DatagramPacket
 import java.net.DatagramSocket
-import java.net.InetAddress
 import java.net.SocketException
 
 /* ****************************************************************
@@ -44,6 +43,7 @@ class ReceiveUDP constructor(
 
     // We need the app's context in order to send the intent to the main thread.
     private lateinit var parentContext: Context
+
 
     public fun setContext(context: Context) {
         // setter function to specify the context for the app.

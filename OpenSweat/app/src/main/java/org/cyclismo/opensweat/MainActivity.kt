@@ -63,14 +63,8 @@ class MainActivity : AppCompatActivity() {
         // Function called when everything is set up and the app has started up.
         super.onStart()
 
-        // Start up a separate thread that will listen on the appropriate UDP port
-        // for an incoming message from a fan controller. Set the current context
-        // on the listener so it can send an intent to this activity
-        if(!this.receiveThreadActive) {
-            this.receiveThreadActive = true
-            this.incomingUDP.setContext(applicationContext)
-            this.incomingUDP.start()
-        }
+        // See if the receive thread is running. If not start it up.
+        this.checkReceiveThread()
 
         //this.fanQueryStatus()
         // Set up a receiver so that when an incoming message is received
@@ -97,6 +91,20 @@ class MainActivity : AppCompatActivity() {
                 })
             }
         },1000,120000)
+
+    }
+
+    fun checkReceiveThread() {
+        // Start up a separate thread that will listen on the appropriate UDP port
+        // for an incoming message from a fan controller. Set the current context
+        // on the listener so it can send an intent to this activity
+
+        //if(!this.receiveThreadActive) {
+        if(!this.incomingUDP.isAlive()) {
+            this.receiveThreadActive = true
+            this.incomingUDP.setContext(applicationContext)
+            this.incomingUDP.start()
+        }
 
     }
 
@@ -143,6 +151,9 @@ class MainActivity : AppCompatActivity() {
     // Method called to update the appearance and records associated with the given fan number.
     fun fanButtonUpdate(whichFan:Int)
     {
+        // See if the receive thread is still out there and running.
+        this.checkReceiveThread()
+
         // This routine updates everything associated with the given fan.
         // First toggle whether or not the fan is on or off.
         this.fanStatus[whichFan] = !this.fanStatus[whichFan]
@@ -166,6 +177,9 @@ class MainActivity : AppCompatActivity() {
 
     // Method called when the query button is pressed.
     fun fanQueryStatus() {
+        // See if the receive thread is still out there and running.
+        this.checkReceiveThread()
+
         // Send a broadcast UDP message on the subnet to tell the fan controller
         // that it should send back information about the fans' status.
         val sendUDP : SendBroadcastUDP = SendBroadcastUDP(this.portNumber,this.applicationContext)
